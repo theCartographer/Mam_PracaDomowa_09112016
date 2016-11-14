@@ -1,21 +1,32 @@
-clear;
+//sda();
+scf(0);
+clf(0);
+da=gda();
+da.title.text="Zad 6a";
+da.x_location = "middle";
+da.y_location = "middle";
 function [y]=f(x)
-y=2*sin(x)-x;
+y=(cos(x));
 endfunction
 function [y1]=f1(x)
-y1=2*cos(x)-1;
+y1=-sin(x);
 endfunction
-scf(1);
-clf();
-x=(1.2);
-//fplot2d (x,f, style=[5]);
-//fplot2d (x,f1, style=[3]);
-x1=x-(f(x)/f1(x));
-x2=x1-(f(x1)/f1(x1));
-x3=x2-(f(x2)/f1(x2));
-x4=x3-(f(x3)/f1(x3));
-x5=x4-(f(x4)/f1(x4));
-x6=x5-(f(x5)/f1(x5));
+scf(0);
+clf(0);
+x=(0.1:0.1:10)';
+plot(x,f,x,f1);
+legend('funkcja.2*sin(x)-x','pochodna.2*cos(x)-1');
 
-W=[x x1];
-
+eps = 0.00001; // precyzja
+x_prev=1;
+x = x_prev+1; // czy cokolwiek
+iter = 0;
+while iter < 100
+    iter = iter + 1
+    x = x_prev - f(x_prev)/f1(x_prev)
+    plot(x, 0., 'b.');
+    if abs(x-x_prev)<eps then
+        break;
+    end
+    x_prev = x;
+end
