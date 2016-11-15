@@ -24,8 +24,8 @@ iter = 0;
 while iter < 100
     iter = iter + 1
     x = x_prev - f(x_prev)/f1(x_prev)
-    plot(x, 0., 'b.');
     if abs(x-x_prev)<eps then
+        plot(x, 0., 'b.');
         break;
     end
     x_prev = x;
