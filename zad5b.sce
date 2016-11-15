@@ -9,24 +9,31 @@ function [y]=f(x)
 y=(sin(x)/x)-1/2;
 endfunction
 function [y1]=f1(x)
-y1=(x*cos(x)-sin(x))/x;
+y1=cos(x)/x-sin(x)/x^2;
 endfunction
 scf(0);
 clf(0);
-x=(0.1:0.1:10)';
-plot(x,f,x,f1);
-legend('funkcja.2*sin(x)-x','pochodna.2*cos(x)-1');
 
-eps = 0.00001; // precyzja
+x1=(-4:0.01:-0.01)';
+x2=(0.01:0.01:4)';
+x = [x1;x2];
+y2 = 0.5*ones(length(x),1);
+
+plot(x,sin(x)./x,x,y2);
+legend('funkcja y=sin(x)/x','funkcja y=1/2');
+
+eps = 0.0001; // precyzja
 x_prev=1.1;
 x = x_prev+1; // czy cokolwiek
 iter = 0;
 while iter < 100
     iter = iter + 1
     x = x_prev - f(x_prev)/f1(x_prev)
-    plot(x, 0., 'b.');
-    if abs(x-x_prev)<eps then
+    if abs(f(x))<eps then
+        plot(x,sin(x)/x,'r^')
+        disp("Znaleziono rozwiazanie, x = ");
+        disp(x);
         break;
     end
-    x_prev = x;
+     x_prev = x;
 end
